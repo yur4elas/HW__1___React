@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Todo list</title>
+   <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+   <div class="wrapper">
+      <div class="container">
+         <div class="todo-list-app">
+            <h1>Todo List</h1>
+            <div class="search">
+               <input type="text" class="search__input">
+               <div class="search__buttons">
+                  <button class="button__search button__search--all" activeBtn>All</button>
+                  <button class="button__search button__search--done">Done</button>
+                  <button class="button__search button__search--active">Active</button>
+               </div>
+            </div>
+            <ul class="todolist"></ul>
+            <form class="add-task">
+               <input type="text" class="add-task__input">
+               <input type="submit" class="add-task__button" value="Add task">
+            </form>
+            <div class="count-block"></div>
+
+         </div>
+      </div>
+   </div>
+
+   <script src="./js/index.js"></script>
+</body>
+
+</html>
