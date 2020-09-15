@@ -1,14 +1,19 @@
 const addTaskInput = document.querySelector('.add-task__input'),
    addTaskButton = document.querySelector('.add-task__button'),
    todolist = document.querySelector('.todolist'),
-   searchButtonDiv = document.querySelector('.search__buttons');
-searchButtons = document.querySelectorAll('.button__search');
+   searchButtonDiv = document.querySelector('.search__buttons'),
+   searchButtons = document.querySelectorAll('.button__search'),
+   countDiv = document.querySelector('.count-block');
 
 let arrTodolist = [];
-
+let arrTodolistDone = [];
+let arrTodolistImportant = [];
 
 if (localStorage.getItem('todo')) {
    arrTodolist = JSON.parse(localStorage.getItem('todo'));
+   arrTodolistDone = JSON.parse(localStorage.getItem('todoCheck'))
+   arrTodolistImportant = JSON.parse(localStorage.getItem('todoImportant'));
+   printCount();
    printAllTasks();
 }
 
@@ -55,10 +60,15 @@ todolist.addEventListener('click', (e) => {
       };
       if (e.target.textContent === 'Отметить' && Number(e.target.parentElement.parentElement.id) === index) {
          task.important = !task.important;
+         arrTodolistImportant = arrTodolist.filter(task => task.important === true);
+         localStorage.setItem('todoImportant', JSON.stringify(arrTodolistImportant));
       };
       if (e.target.textContent === task.title && Number(e.target.parentElement.id) === index) {
          task.check = !task.check;
+         arrTodolistDone = arrTodolist.filter(task => task.check === true);
+         localStorage.setItem('todoCheck', JSON.stringify(arrTodolistDone));
       };
+      printCount();
       printAllTasks();
    })
 })
@@ -91,3 +101,10 @@ searchButtons.forEach((btn) => {
 //    }
 // })
 
+function printCount() {
+   countDiv.innerHTML = `
+   <div>Готово - ${arrTodolistDone.length}</div>   
+   <div>Важных - ${arrTodolistImportant.length}</div>
+   `;
+};
+printCount();
